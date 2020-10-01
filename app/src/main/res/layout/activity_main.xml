@@ -13,7 +13,7 @@
         android:layout_height="88dp"
         android:layout_marginTop="56dp"
         android:gravity="center"
-        android:text="@string/Titulo"
+        android:text="@string/txtTitulo"
         android:textColor="#009688"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,31 +36,45 @@
         app:layout_constraintTop_toBottomOf="@+id/spinnerR"
         tools:text="@string/btnIniciar" />
 
-    <Spinner
-        android:id="@+id/spinnerM"
-        android:layout_width="144dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="76dp"
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/txtSubtitulo1"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/txtTitulo"
+        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="@+id/txtTitulo"
         app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
 
     <Spinner
-        android:id="@+id/spinnerN"
+        android:id="@+id/spinnerK"
         android:layout_width="144dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerM"
-        app:layout_constraintStart_toStartOf="@+id/spinnerM"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerM" />
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/txtSubtitulo2"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/spinnerK"
+        app:layout_constraintStart_toStartOf="@+id/spinnerK"
+        app:layout_constraintTop_toBottomOf="@+id/spinnerK" />
 
     <Spinner
         android:id="@+id/spinnerR"
         android:layout_width="144dp"
         android:layout_height="50dp"
-        android:layout_marginTop="48dp"
-        app:layout_constraintEnd_toEndOf="@+id/spinnerN"
-        app:layout_constraintStart_toStartOf="@+id/spinnerN"
-        app:layout_constraintTop_toBottomOf="@+id/spinnerN" />
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
