@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name">Algebra Vectores</string>
-    <string name="Titulo">Dependencia e independencia lineal en R2 y R3</string>
+    <string name="txtTitulo">Dependencia e independencia lineal en R2 y R3</string>
     <string name="btnIniciar">Iniciar</string>
-    <string name="btnCalcular">Calcular</string>
+    <string name="btnReIniciar">Re-Iniciar</string>
+    <string name="txtSubtitulo1">Elige la cantidad de vectores:</string>
+    <string name="txtSubtitulo2">Elige Rn:</string>
+    <string name="title_activity_main3">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
