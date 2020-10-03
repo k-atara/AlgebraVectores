@@ -106,7 +106,7 @@ class MainActivity3 : AppCompatActivity() {
 
             if(k-1!=r){
                 if(k-1>r){
-                    resultado="Es linealmente dependiente porque el número de vectores es mayor a Rn entonces k>n = "+k.toString()+">"+r.toString()
+                    resultado="Es linealmente dependiente porque el número de vectores es mayor a Rn entonces k>n = "+(k-1).toString()+">"+r.toString()
                 }
                 if(k-1<r){
                     resultado="Es linealmente dependiente porque en el conjunto de vectores hay un vector cero"
