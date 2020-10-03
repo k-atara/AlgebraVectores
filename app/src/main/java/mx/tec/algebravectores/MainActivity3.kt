@@ -102,12 +102,24 @@ class MainActivity3 : AppCompatActivity() {
                 println()
             }
 
+            var suma =0.0
 
-            if(k-1>r){
-                resultado="Es linealmente dependiente porque el número de vectores es mayor a Rn entonces k>n = "+k.toString()+">"+r.toString()
-            }
-            if(k-1<r){
-                resultado="Es linealmente dependiente porque en el conjunto de vectores hay un vector cero"
+            if(k-1!=r){
+                if(k-1>r){
+                    resultado="Es linealmente dependiente porque el número de vectores es mayor a Rn entonces k>n = "+k.toString()+">"+r.toString()
+                }
+                if(k-1<r){
+                    resultado="Es linealmente dependiente porque en el conjunto de vectores hay un vector cero"
+                }
+            }else{
+                for(i in 0 until listadoble.size){
+                    suma = suma + listadoble[i][i]
+                }
+                if(suma == k-1.toDouble()){
+                    resultado="Es linealmente independiente"
+                }else{
+                    resultado="Es linealmente dependiente"
+                }
             }
 
             Snackbar.make(view, resultado, Snackbar.LENGTH_LONG)
@@ -163,7 +175,7 @@ class MainActivity3 : AppCompatActivity() {
             lead++
         }
 
-       Log.e("Matriz", arr[0][3].toString())
+       //Log.e("Matriz", arr[0][3].toString())
 
 
        /*
