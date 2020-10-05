@@ -27,16 +27,18 @@ class MainActivity3 : AppCompatActivity() {
 
         toReducedRowEchelonForm(matriz)
 
-        var k = intent.getStringExtra("param1").toString().toInt()
-        val r = intent.getStringExtra("param2").toString().toInt()
+        var k = intent.getStringExtra("param1").toString().toInt() //varibale que guarda la cantidad de vectores a ingresar.
+        val r = intent.getStringExtra("param2").toString().toInt() //variable para tomar el valor de Rn
         k+=1
-        //Log.e("Values", m)
+
         val listaVectores = arrayListOf<EditText>()
         val listadoble = Array(r) { DoubleArray(k) }
         val constraintLayout = findViewById(R.id.constraintLayout) as ConstraintLayout
         val cont = 120F
         var id = 0
         var vv=0F
+
+        //Los siguientes for anidados son para generar los inputs para escribir los vectores.
         for(item in 1..r) {
             for (item1 in 1..k) {
                 val bot = EditText(this@MainActivity3)
@@ -48,18 +50,13 @@ class MainActivity3 : AppCompatActivity() {
                     ConstraintLayout.LayoutParams.WRAP_CONTENT
                 )
                 bot.translationX = 40F + cont * (item1 + 1)
-                bot.translationY = 200F+vv
+                bot.translationY = 600F+vv
                 bot.layoutParams.width = 100
                 bot.id = id
-
                 Log.e("ID", bot.id.toString())
-                //Log.e("Values", item1.toString())
                 constraintLayout.addView(bot)
                 id+=1
                 listaVectores.add(bot)
-               // Log.e("Lista", listaVectores[0].text.toString())
-               // listaVectores.get(0).text.toString().toDouble()
-                //Log.e("Lista", listaVectores.get(0).id.toString())
             }
             vv+=100F
         }
@@ -67,12 +64,10 @@ class MainActivity3 : AppCompatActivity() {
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
 
 
-
-
             var tamanoMatriz = 0
+                //for para guardar en una matriz tipo de dato Double los datos que se ingresaron en los inputs. Para posteriormente usar operaciones.
             for(item in 0..r-1) {
                 for (item1 in 0..k-1) {
-
 
                     listadoble[item][item1]= listaVectores.get(tamanoMatriz).text.toString().toDouble()
                     tamanoMatriz++
@@ -100,9 +95,11 @@ class MainActivity3 : AppCompatActivity() {
             var suma =0.0
 
             if(k-1!=r){
+                //condición para inidicar si el número de vectores ingresados fue mayor al indicado en Rn
                 if(k-1>r){
                     resultado="Es linealmente dependiente porque el número de vectores es mayor a Rn entonces k>n = "+(k-1).toString()+">"+r.toString()
                 }
+                //condición para inidicar si el número de vectores ingresados fue menor al indicado en Rn
                 if(k-1<r){
                     resultado="Es linealmente dependiente porque en el conjunto de vectores hay un vector cero"
                 }
@@ -116,7 +113,7 @@ class MainActivity3 : AppCompatActivity() {
                     resultado="Es linealmente dependiente"
                 }
             }
-
+            //Funcionalidad para cuando le das click al botón para que te indique si tu matriz es linealmente independiente o independiente.
             Snackbar.make(view, resultado, Snackbar.LENGTH_LONG)
                 .setAction("Action"){
                     val i = Intent(this@MainActivity3, MainActivity2::class.java)
@@ -125,16 +122,14 @@ class MainActivity3 : AppCompatActivity() {
                     startActivity(i)
                 }.show()
         }
-        /* changes the matrix to RREF 'in place' */
-
-       // matriz.toReducedRowEchelonForm()
-      //  Log.e("Matriz", matriz.toString())
     }
 
+
+//Función que realizará las operaciones para llevar la matriz a la reducida.
    private fun toReducedRowEchelonForm(arr:Array<DoubleArray>) {
         var lead = 0
         val rowCount = arr.size
-        val colCount = arr[0].size
+       val colCount = arr[0].size
         for (r in 0 until rowCount) {
             if (colCount <= lead) return
             var i = r
@@ -166,19 +161,6 @@ class MainActivity3 : AppCompatActivity() {
 
             lead++
         }
-
-       //Log.e("Matriz", arr[0][3].toString())
-       /*
-       for (r in 0 until arr.size) {
-           for (c in 0 until arr[0].size) {
-               if (arr[r][c] == -0.0) arr[r][c] = 0.0  // get rid of negative zeros
-               print("${"% 6.2f".format(arr[r][c])}  ")
-           }
-           println()
-       }
-
-    */
-
    }
 }
 
