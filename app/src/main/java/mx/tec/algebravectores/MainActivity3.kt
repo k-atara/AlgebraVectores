@@ -10,7 +10,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.marginBottom
 import java.util.ArrayList
 
 class MainActivity3 : AppCompatActivity() {
@@ -34,7 +33,7 @@ class MainActivity3 : AppCompatActivity() {
 
         val listaVectores = arrayListOf<EditText>()
         val listadoble = Array(r) { DoubleArray(k) }
-        val constraintLayout = findViewById<ConstraintLayout>(R.id.constraintLayout)
+        val constraintLayout = findViewById(R.id.constraintLayout) as ConstraintLayout
         val cont = 120F
         var id = 0
         var vv=0F
@@ -47,12 +46,11 @@ class MainActivity3 : AppCompatActivity() {
 
 
                 bot.layoutParams = ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.PARENT_ID,
-                    ConstraintLayout.LayoutParams.PARENT_ID
+                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
+                    ConstraintLayout.LayoutParams.WRAP_CONTENT
                 )
-
                 bot.translationX = 40F + cont * (item1 + 1)
-               bot.translationY = 600F+vv
+                bot.translationY = 400F+vv
                 bot.layoutParams.width = 100
                 bot.id = id
                 Log.e("ID", bot.id.toString())
@@ -103,7 +101,7 @@ class MainActivity3 : AppCompatActivity() {
                 }
                 //condición para inidicar si el número de vectores ingresados fue menor al indicado en Rn
                 if(k-1<r){
-                    resultado="Es linealmente dependiente porque en el conjunto de vectores hay un vector cero"
+                    resultado="Es linealmente dependiente porque el conjunto de vectores tiene al menos un vector cero"
                 }
             }else{
                 for(i in 0 until listadoble.size){
