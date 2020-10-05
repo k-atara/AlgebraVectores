@@ -50,7 +50,7 @@ class MainActivity3 : AppCompatActivity() {
                     ConstraintLayout.LayoutParams.WRAP_CONTENT
                 )
                 bot.translationX = 40F + cont * (item1 + 1)
-                bot.translationY = 600F+vv
+                bot.translationY = 400F+vv
                 bot.layoutParams.width = 100
                 bot.id = id
                 Log.e("ID", bot.id.toString())
@@ -101,7 +101,7 @@ class MainActivity3 : AppCompatActivity() {
                 }
                 //condición para inidicar si el número de vectores ingresados fue menor al indicado en Rn
                 if(k-1<r){
-                    resultado="Es linealmente dependiente porque en el conjunto de vectores hay un vector cero"
+                    resultado="Es linealmente dependiente porque en el conjunto de vectores hay al menos un vector cero"
                 }
             }else{
                 for(i in 0 until listadoble.size){
