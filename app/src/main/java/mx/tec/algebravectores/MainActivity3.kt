@@ -27,7 +27,7 @@ class MainActivity3 : AppCompatActivity() {
 
         toReducedRowEchelonForm(matriz)
 
-        var k = intent.getStringExtra("param1").toString().toInt() //varibale que guarda la cantidad de vectores a ingresar.
+        var k = intent.getStringExtra("param1").toString().toInt() //variable que guarda la cantidad de vectores a ingresar.
         val r = intent.getStringExtra("param2").toString().toInt() //variable para tomar el valor de Rn
         k+=1
 
@@ -115,17 +115,17 @@ class MainActivity3 : AppCompatActivity() {
             }
             //Funcionalidad para cuando le das click al botón para que te indique si tu matriz es linealmente independiente o independiente.
             Snackbar.make(view, resultado, Snackbar.LENGTH_LONG)
-                .setAction("Action"){
-                    val i = Intent(this@MainActivity3, MainActivity2::class.java)
-                    i.putExtra("param1",  k.toString())
-                    i.putExtra("param2",  r.toString())
+                .setAction("Back"){
+                    val i = Intent(this@MainActivity3, MainActivity::class.java)
+                    i.flags= Intent. FLAG_ACTIVITY_CLEAR_TASK or
+                            Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(i)
                 }.show()
         }
     }
 
 
-//Función que realizará las operaciones para llevar la matriz a la reducida.
+    //Función que realizará las operaciones para llevar la matriz a la reducida.
    private fun toReducedRowEchelonForm(arr:Array<DoubleArray>) {
         var lead = 0
         val rowCount = arr.size
