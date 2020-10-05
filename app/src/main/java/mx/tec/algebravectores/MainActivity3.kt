@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.text.InputType
 import android.util.Log
 import android.widget.EditText
-import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import java.util.ArrayList
 
 class MainActivity3 : AppCompatActivity() {
 
@@ -25,14 +23,12 @@ class MainActivity3 : AppCompatActivity() {
             doubleArrayOf(-2.0, 0.0, -3.0,  22.0,0.0)
         )
 
-        toReducedRowEchelonForm(matriz)
-
         var k = intent.getStringExtra("param1").toString().toInt() //variable que guarda la cantidad de vectores a ingresar.
         val r = intent.getStringExtra("param2").toString().toInt() //variable para tomar el valor de Rn
         k+=1
 
-        val listaVectores = arrayListOf<EditText>()
-        val listadoble = Array(r) { DoubleArray(k) }
+        val listaVectores = arrayListOf<EditText>() //lista de inputs
+        val listadoble = Array(r) { DoubleArray(k) } //matriz de vectores
         val constraintLayout = findViewById(R.id.constraintLayout) as ConstraintLayout
         val cont = 120F
         var id = 0
@@ -65,7 +61,7 @@ class MainActivity3 : AppCompatActivity() {
 
 
             var tamanoMatriz = 0
-                //for para guardar en una matriz tipo de dato Double los datos que se ingresaron en los inputs. Para posteriormente usar operaciones.
+                //for para guardar en una matriz tipo de dato Double, los datos que se ingresaron en los inputs. Para posteriormente usar operaciones.
             for(item in 0..r-1) {
                 for (item1 in 0..k-1) {
 
@@ -99,7 +95,7 @@ class MainActivity3 : AppCompatActivity() {
                 if(k-1>r){
                     resultado="Es linealmente dependiente porque el número de vectores es mayor a Rn entonces k>n = "+(k-1).toString()+">"+r.toString()
                 }
-                //condición para inidicar si el número de vectores ingresados fue menor al indicado en Rn
+                //condición para inidicar si el número de vectores ingresados fue menor al indicado en Rn, esto quiere decir que al menos hay un vector en ceros
                 if(k-1<r){
                     resultado="Es linealmente dependiente porque el conjunto de vectores tiene al menos un vector cero"
                 }
@@ -107,13 +103,14 @@ class MainActivity3 : AppCompatActivity() {
                 for(i in 0 until listadoble.size){
                     suma = suma + listadoble[i][i]
                 }
+                //Condición para determinar si es independiente
                 if(suma == k-1.toDouble()){
                     resultado="Es linealmente independiente"
                 }else{
                     resultado="Es linealmente dependiente"
                 }
             }
-            //Funcionalidad para cuando le das click al botón para que te indique si tu matriz es linealmente independiente o independiente.
+            //Funcionalidad para cuando le das click al botón para que te indique si tu matriz es linealmente independiente o independiente, y te regresa al inicio.
             Snackbar.make(view, resultado, Snackbar.LENGTH_LONG)
                 .setAction("Back"){
                     val i = Intent(this@MainActivity3, MainActivity::class.java)
@@ -124,15 +121,15 @@ class MainActivity3 : AppCompatActivity() {
         }
     }
 
-
     //Función que realizará las operaciones para llevar la matriz a la reducida.
    private fun toReducedRowEchelonForm(arr:Array<DoubleArray>) {
         var lead = 0
-        val rowCount = arr.size
-       val colCount = arr[0].size
-        for (r in 0 until rowCount) {
-            if (colCount <= lead) return
-            var i = r
+        val rowCount = arr.size //toma el tamaño de las filas
+       val colCount = arr[0].size //toma el tamaño del primer vector que son las columnas
+
+        for (r in 0 until rowCount) { //desde 0 hasta cada fila recorre la matriz
+            if (colCount <= lead) return //se regresa si es menor igual a lead
+            var i = r //variable que lleva el control del for
 
             while (arr[i][lead] == 0.0) {
                 i++
@@ -147,11 +144,12 @@ class MainActivity3 : AppCompatActivity() {
             arr[i] = arr[r]
             arr[r] = temp
 
+            //Multiplicación
             if (arr[r][lead] != 0.0) {
                 val div = arr[r][lead]
                 for (j in 0 until colCount) arr[r][j] /= div
             }
-
+            //División
             for (k in 0 until rowCount) {
                 if (k != r) {
                     val mult = arr[k][lead]
