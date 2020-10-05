@@ -10,6 +10,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.marginBottom
 import java.util.ArrayList
 
 class MainActivity3 : AppCompatActivity() {
@@ -33,7 +34,7 @@ class MainActivity3 : AppCompatActivity() {
 
         val listaVectores = arrayListOf<EditText>()
         val listadoble = Array(r) { DoubleArray(k) }
-        val constraintLayout = findViewById(R.id.constraintLayout) as ConstraintLayout
+        val constraintLayout = findViewById<ConstraintLayout>(R.id.constraintLayout)
         val cont = 120F
         var id = 0
         var vv=0F
@@ -46,11 +47,12 @@ class MainActivity3 : AppCompatActivity() {
 
 
                 bot.layoutParams = ConstraintLayout.LayoutParams(
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT,
-                    ConstraintLayout.LayoutParams.WRAP_CONTENT
+                    ConstraintLayout.LayoutParams.PARENT_ID,
+                    ConstraintLayout.LayoutParams.PARENT_ID
                 )
+
                 bot.translationX = 40F + cont * (item1 + 1)
-                bot.translationY = 600F+vv
+               bot.translationY = 600F+vv
                 bot.layoutParams.width = 100
                 bot.id = id
                 Log.e("ID", bot.id.toString())
