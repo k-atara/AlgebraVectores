@@ -27,8 +27,6 @@ class MainActivity3 : AppCompatActivity() {
 
         toReducedRowEchelonForm(matriz)
 
-
-
         var k = intent.getStringExtra("param1").toString().toInt()
         val r = intent.getStringExtra("param2").toString().toInt()
         k+=1
@@ -60,9 +58,6 @@ class MainActivity3 : AppCompatActivity() {
                 id+=1
                 listaVectores.add(bot)
                // Log.e("Lista", listaVectores[0].text.toString())
-
-
-
                // listaVectores.get(0).text.toString().toDouble()
                 //Log.e("Lista", listaVectores.get(0).id.toString())
             }
@@ -130,9 +125,6 @@ class MainActivity3 : AppCompatActivity() {
                     startActivity(i)
                 }.show()
         }
-
-
-
         /* changes the matrix to RREF 'in place' */
 
        // matriz.toReducedRowEchelonForm()
@@ -176,8 +168,6 @@ class MainActivity3 : AppCompatActivity() {
         }
 
        //Log.e("Matriz", arr[0][3].toString())
-
-
        /*
        for (r in 0 until arr.size) {
            for (c in 0 until arr[0].size) {
