@@ -99,6 +99,22 @@ class MainActivity3 : AppCompatActivity() {
                 if(k-1<r){
                     resultado="Es linealmente dependiente porque el conjunto de vectores tiene al menos un vector cero"
                 }
+                if(k-1==1){
+                    if(r==2){
+                        if(listadoble[0][0]!=0.0 || listadoble[0][1]!=0.0){
+                            resultado="Es linealmente independiente"
+                        }else{
+                            resultado="Es linealmente dependiente "
+                        }
+                    }else if(r==3){
+                        if(listadoble[0][0]!=0.0 || listadoble[0][1]!=0.0 || listadoble[0][2]!=0.0 ){
+                            resultado="Es linealmente independiente"
+                        }else{
+                            resultado="Es linealmente dependiente "
+                        }
+                    }
+
+                }
             }else{
                 for(i in 0 until listadoble.size){
                     suma = suma + listadoble[i][i]
