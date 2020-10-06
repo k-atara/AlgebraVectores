@@ -42,8 +42,7 @@ class MainActivity3 : AppCompatActivity() {
         for(item in 1..r) {
             for (item1 in 1..k) {
                 val bot = EditText(this@MainActivity3)
-                bot.inputType = InputType.TYPE_NUMBER_FLAG_SIGNED + InputType.TYPE_NUMBER_FLAG_DECIMAL + InputType.TYPE_CLASS_NUMBER
-
+                bot.inputType = InputType.TYPE_CLASS_DATETIME+InputType.TYPE_NUMBER_FLAG_SIGNED + InputType.TYPE_NUMBER_FLAG_DECIMAL + InputType.TYPE_CLASS_NUMBER + InputType.TYPE_DATETIME_VARIATION_TIME
 
                 bot.layoutParams = ConstraintLayout.LayoutParams(
                     ConstraintLayout.LayoutParams.WRAP_CONTENT,
@@ -69,8 +68,29 @@ class MainActivity3 : AppCompatActivity() {
             for(item in 0..r-1) {
                 for (item1 in 0..k-1) {
 
-                    listadoble[item][item1]= listaVectores.get(tamanoMatriz).text.toString().toDouble()
+
+
+                    if(listaVectores.get(tamanoMatriz).text.contains("/")){
+
+                        val opera=listaVectores.get(tamanoMatriz).text.split("/")
+
+                        Log.e("OPERA",opera.toString())
+                        Log.e("PRIMER OPERA",opera[0].toString())
+                        Log.e("SEGUNDO OPERA",opera[1].toString())
+                        var resultado=0.00
+                        resultado=opera[0].toString().toDouble()/opera[1].toString().toDouble()
+                        resultado.toString().toDouble()
+                        Log.e("Resultado",resultado.toString())
+                        listadoble[item][item1]=resultado
+
+
+                    }else{
+
+                        listadoble[item][item1]= listaVectores.get(tamanoMatriz).text.toString().toDouble()
+
+                    }
                     tamanoMatriz++
+
                 }
             }
 
@@ -92,42 +112,27 @@ class MainActivity3 : AppCompatActivity() {
                 println()
             }
 
-            var suma =0.0
+            var suma1 =0.0
+            var suma2 =0.0
+            for(i in 0 until listadoble.size){
+                for(n in 0 until listadoble[0].size) {
+                    suma1 = suma1 + listadoble[i][n]
+                }
+            }
+            for(i in 0 until listadoble.size){
+                suma2 = suma2 + listadoble[i][i]
+            }
 
-            if(k-1!=r){
-                //condición para inidicar si el número de vectores ingresados fue mayor al indicado en Rn
-                if(k-1>r){
-                    resultado="Es linealmente dependiente porque el número de vectores es mayor a Rn entonces k>n = "+(k-1).toString()+">"+r.toString()
-                }
-                //condición para inidicar si el número de vectores ingresados fue menor al indicado en Rn
-                if(k-1<r){
-                    resultado="Es linealmente dependiente porque el conjunto de vectores tiene al menos un vector cero"
-                }
-                if(k-1==1){
-                    if(r==2){
-                        if(listadoble[0][0]!=0.0 || listadoble[0][1]!=0.0){
-                            resultado="Es linealmente independiente"
-                        }else{
-                            resultado="Es linealmente dependiente "
-                        }
-                    }else if(r==3){
-                        if(listadoble[0][0]!=0.0 || listadoble[0][1]!=0.0 || listadoble[0][2]!=0.0 ){
-                            resultado="Es linealmente independiente"
-                        }else{
-                            resultado="Es linealmente dependiente "
-                        }
-                    }
+            Log.e("K", (k-1).toString())
+            Log.e("Suma matriz", suma1.toString())
+            Log.e("Suma matriz", suma2.toString())
 
-                }
+            //Condición para determinar si es independiente
+            if(suma1 == k-1.toDouble() && suma2 == k-1.toDouble()){
+                resultado="Es linealmente independiente"
             }else{
-                for(i in 0 until listadoble.size){
-                    suma = suma + listadoble[i][i]
-                }
-                if(suma == k-1.toDouble()){
-                    resultado="Es linealmente independiente"
-                }else{
-                    resultado="Es linealmente dependiente"
-                }
+                resultado="Es linealmente dependiente"
+
             }
             //Funcionalidad para cuando le das click al botón para que te indique si tu matriz es linealmente independiente o independiente.
             Snackbar.make(view, resultado, Snackbar.LENGTH_LONG)
