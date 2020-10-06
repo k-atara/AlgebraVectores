@@ -38,8 +38,7 @@ class MainActivity3 : AppCompatActivity() {
         for(item in 1..r) {
             for (item1 in 1..k) {
                 val bot = EditText(this@MainActivity3)
-                bot.inputType = InputType.TYPE_NUMBER_FLAG_SIGNED + InputType.TYPE_NUMBER_FLAG_DECIMAL + InputType.TYPE_CLASS_NUMBER
-
+                bot.inputType = InputType.TYPE_CLASS_DATETIME+InputType.TYPE_NUMBER_FLAG_SIGNED + InputType.TYPE_NUMBER_FLAG_DECIMAL + InputType.TYPE_CLASS_NUMBER + InputType.TYPE_DATETIME_VARIATION_TIME
 
                 bot.layoutParams = ConstraintLayout.LayoutParams(
                     ConstraintLayout.LayoutParams.WRAP_CONTENT,
@@ -65,8 +64,29 @@ class MainActivity3 : AppCompatActivity() {
             for(item in 0..r-1) {
                 for (item1 in 0..k-1) {
 
-                    listadoble[item][item1]= listaVectores.get(tamanoMatriz).text.toString().toDouble()
+
+
+                    if(listaVectores.get(tamanoMatriz).text.contains("/")){
+
+                        val opera=listaVectores.get(tamanoMatriz).text.split("/")
+
+                        Log.e("OPERA",opera.toString())
+                        Log.e("PRIMER OPERA",opera[0].toString())
+                        Log.e("SEGUNDO OPERA",opera[1].toString())
+                        var resultado=0.00
+                        resultado=opera[0].toString().toDouble()/opera[1].toString().toDouble()
+                        resultado.toString().toDouble()
+                        Log.e("Resultado",resultado.toString())
+                        listadoble[item][item1]=resultado
+
+
+                    }else{
+
+                        listadoble[item][item1]= listaVectores.get(tamanoMatriz).text.toString().toDouble()
+
+                    }
                     tamanoMatriz++
+
                 }
             }
 
