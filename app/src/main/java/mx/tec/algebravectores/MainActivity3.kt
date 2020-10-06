@@ -115,8 +115,8 @@ class MainActivity3 : AppCompatActivity() {
                     suma1 = suma1 + listadoble[i][n]
                 }
             }
-            for(i in 0 until listadoble.size){
-                suma2 = suma2 + listadoble[i][i]
+            for(i in 0 until listadoble[0].size-1){
+                suma2 += listadoble[i][i]
             }
 
             Log.e("K", (k-1).toString())
