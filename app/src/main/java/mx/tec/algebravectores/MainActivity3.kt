@@ -17,10 +17,11 @@ class MainActivity3 : AppCompatActivity() {
         setContentView(R.layout.activity_main3)
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        //Matriz de ejemplo de como se guarda en memoria la matriz
         val matriz = arrayOf(
-            doubleArrayOf( 1.0, 2.0, -1.0, -4.0,0.0),
-            doubleArrayOf( 2.0, 3.0, -1.0, -11.0,0.0),
-            doubleArrayOf(-2.0, 0.0, -3.0,  22.0,0.0)
+            doubleArrayOf( 1.0, 2.0, -1.0, -4.0, 0.0),
+            doubleArrayOf( 2.0, 3.0, -1.0, -11.0, 0.0),
+            doubleArrayOf(-2.0, 0.0, -3.0,  22.0, 0.0)
         )
 
         var k = intent.getStringExtra("param1").toString().toInt() //variable que guarda la cantidad de vectores a ingresar.
@@ -58,31 +59,29 @@ class MainActivity3 : AppCompatActivity() {
         var resultado = ""
         findViewById<FloatingActionButton>(R.id.fab).setOnClickListener { view ->
 
-
+        if(k-1<=r) {
             var tamanoMatriz = 0
-                //for para guardar en una matriz tipo de dato Double, los datos que se ingresaron en los inputs. Para posteriormente usar operaciones.
-            for(item in 0..r-1) {
-                for (item1 in 0..k-1) {
+            //for para guardar en una matriz tipo de dato Double, los datos que se ingresaron en los inputs. Para posteriormente usar operaciones.
+            for (item in 0..r - 1) {
+                for (item1 in 0..k - 1) {
 
+                    //Condición para aceptar las fracciones
+                    if (listaVectores.get(tamanoMatriz).text.contains("/")) {
 
+                        val opera = listaVectores.get(tamanoMatriz).text.split("/")
 
-                    if(listaVectores.get(tamanoMatriz).text.contains("/")){
-
-                        val opera=listaVectores.get(tamanoMatriz).text.split("/")
-
-                        Log.e("OPERA",opera.toString())
-                        Log.e("PRIMER OPERA",opera[0].toString())
-                        Log.e("SEGUNDO OPERA",opera[1].toString())
-                        var resultado=0.00
-                        resultado=opera[0].toString().toDouble()/opera[1].toString().toDouble()
+                        Log.e("OPERA", opera.toString())
+                        Log.e("PRIMER OPERA", opera[0].toString())
+                        Log.e("SEGUNDO OPERA", opera[1].toString())
+                        var resultado = 0.00
+                        resultado = opera[0].toString().toDouble() / opera[1].toString().toDouble()
                         resultado.toString().toDouble()
-                        Log.e("Resultado",resultado.toString())
-                        listadoble[item][item1]=resultado
+                        Log.e("Resultado", resultado.toString())
+                        listadoble[item][item1] = resultado
 
+                    } else {
 
-                    }else{
-
-                        listadoble[item][item1]= listaVectores.get(tamanoMatriz).text.toString().toDouble()
+                        listadoble[item][item1] = listaVectores.get(tamanoMatriz).text.toString().toDouble()
 
                     }
                     tamanoMatriz++
@@ -92,44 +91,48 @@ class MainActivity3 : AppCompatActivity() {
 
             for (r in 0 until listadoble.size) {
                 for (c in 0 until listadoble[0].size) {
-                    if (listadoble[r][c] == -0.0) listadoble[r][c] = 0.0  // get rid of negative zeros
+                    if (listadoble[r][c] == -0.0) listadoble[r][c] =
+                        0.0  // get rid of negative zeros
                     print("${"% 6.2f".format(listadoble[r][c])}  ")
                 }
                 println()
             }
-
+            //Mandamos a llamar el metodo para reducir la matriz y le enviamos la matriz original
             toReducedRowEchelonForm(listadoble)
 
             for (r in 0 until listadoble.size) {
                 for (c in 0 until listadoble[0].size) {
-                    if (listadoble[r][c] == -0.0) listadoble[r][c] = 0.0  // get rid of negative zeros
+                    if (listadoble[r][c] == -0.0) listadoble[r][c] =
+                        0.0  // get rid of negative zeros
                     print("${"% 6.2f".format(listadoble[r][c])}  ")
                 }
                 println()
             }
 
-            var suma1 =0.0
-            var suma2 =0.0
-            for(i in 0 until listadoble.size){
-                for(n in 0 until listadoble[0].size) {
+            var suma1 = 0.0
+            var suma2 = 0.0
+            for (i in 0 until listadoble.size) {
+                for (n in 0 until listadoble[0].size) {
                     suma1 = suma1 + listadoble[i][n]
                 }
             }
-            for(i in 0 until listadoble[0].size-1){
+            for (i in 0 until listadoble[0].size - 1) {
                 suma2 = suma2 + listadoble[i][i]
             }
 
-            Log.e("K", (k-1).toString())
+            Log.e("K", (k - 1).toString())
             Log.e("Suma matriz", suma1.toString())
             Log.e("Suma matriz", suma2.toString())
 
             //Condición para determinar si es independiente
-            if(suma1 == k-1.toDouble() && suma2 == k-1.toDouble()){
-                resultado="Es linealmente independiente"
-            }else{
-                resultado="Es linealmente dependiente"
+            if (suma1 == k - 1.toDouble() && suma2 == k - 1.toDouble()) {
+                resultado = "Es linealmente independiente"
+            } else {
+                resultado = "Es linealmente dependiente"
             }
-
+            }else{
+             resultado="Es linealmente dependiente porque el número de vectores es mayor a Rn"
+            }
             //Funcionalidad para cuando le das click al botón para que te indique si tu matriz es linealmente independiente o independiente, y te regresa al inicio.
             Snackbar.make(view, resultado, Snackbar.LENGTH_LONG)
                 .setAction("Back"){
